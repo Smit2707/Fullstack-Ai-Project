@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const ThemeToggle = ({ theme, setTheme }) => {
+const ThemeToggle = () => {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme(t => (t === 'light' ? 'dark' : 'light'));
+  }
+
   return (
-    <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
-      <button
-        className="p-2 rounded-xl backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 hover:bg-white/90 dark:hover:bg-gray-700/90 transition"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        aria-label="Toggle theme"
-      >
-        {theme === "dark" ? "🌙" : "🌞"}
-      </button>
-    </div>
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className="theme-toggle"
+      aria-label={theme === 'light' ? 'Activate dark mode' : 'Activate light mode'}
+    >
+      {theme === 'light' ? '🌙' : '☀️'}
+    </button>
   );
 };
 

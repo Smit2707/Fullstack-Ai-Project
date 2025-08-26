@@ -1,14 +1,15 @@
-import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import AppRoutes from './AppRoutes'
-import { ToastContainer } from 'react-toastify'
+import { useState } from 'react'
 
-const App = () => {
+import './App.css'
+import AppRoutes from './AppRoutes'
+
+function App() {
+
+
   return (
-  <BrowserRouter>
-    <AppRoutes />
-    <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
-  </BrowserRouter>
+    <>
+      <AppRoutes />
+    </>
   )
 }
 
